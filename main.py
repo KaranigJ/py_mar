@@ -1,4 +1,3 @@
-import CONFIG
 from CONFIG import bot
 from CONFIG import link
 from CONFIG import  chat
@@ -214,12 +213,14 @@ def get_text(message):
 
     if message.text == 'Инструкции к выполнению курса':
         print('course')
-        bot.send_message(message.chat.id,'Уроки будут выходить по понедельникам и четвергам в <b>10:00 МСК</b>\n\n'
-                                        'Срок выполнения домашнего задания — <b>до</b> момента выхода <b>следующего</b> урока\n\n'
-                                        'За <b>своевременное</b> выполнение домашних заданий вам будут начисляться баллы,'
-                                        'по итогам которых вы можете выиграть <b>ценные призы</b>\n\n'
-                                        'Также баллы будут начисляться за <b>приглашение в марафон</b> своих знакомых\n\n'
-                                        'В комментариях пишем сообщения,<b> относящиеся к марафону</b>, никакого <s>негатива</s> и <s>сторонних ссылок</s>',
+        bot.send_message(message.chat.id,'У вас будет на выбор несколько заданий, каждое из которых принесёт вам определённое количество баллов(2, 4, 8 баллов).\n\n'
+                                        'Для получения бОльшего количества баллов, рекомендуется выполнять все задаия.\n\n'
+                                        'Если задание выполнено не полностью или некорректно, то количество баллов уменьшается пропорционально количеству неточностей.\n\n'
+                                        'Ответ отправляется ТОЛЬКО 1 РАЗ. Повторные ответы учитываться не будут.\n\n'
+                                        'Количество набранных баллов будет суммироваться и участвововать в рейтинге всех участников марафона.\n\n'
+                                        'Кураторы не участвуют в начислении баллов.\n\n'
+                                        'Крайний срок выполнения задания — до выхода следующего урока(дата следующего урока указана в боте марафона и на платформе Getcourse)\n\n'
+                                        'Есть возможность дополнительного получения баллов, о которой вы можете узнать у кураторов.\n\n',
                                         parse_mode='html')
     elif message.text == 'Инструкции к выполнению ДЗ':
         dz_markap = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
@@ -241,22 +242,23 @@ def get_text(message):
     if message.text == 'На старт!':
         bot.send_message(message.chat.id, 'У вас уже есть приложение Getcourse.ru?', reply_markup=markup_check)
 
+сurators = []
+csv.read('members.csv', сurators)
+
+
 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 course = types.KeyboardButton('Инструкции к выполнению курса')
 dz = types.KeyboardButton('Инструкции к выполнению ДЗ')
 info = types.KeyboardButton('Информационный канал')
 table = types.KeyboardButton('Расписание')
 again = types.KeyboardButton('На старт!')
-menu.add(course, dz, info, table, again)
+rate = types.KeyboardButton('Рейтинг')
+
+curator = types.KeyboardButton('Мои участники')
+curator_сh = types.KeyboardButton('Куратор')
+
+menu.add(course, dz, info, table, again, curator_сh)
 
 
-
-   # elif message.text == '↩К началу':
-    #    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    #    start = types.KeyboardButton('/start')
-    #    markup.add(start)
-    #    bot.send_message(message.chat.id, 'Давайте начнем?', reply_markup=markup)
-
-
-print('start')
 bot.polling(none_stop=True)
+print('start')
