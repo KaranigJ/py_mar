@@ -4,6 +4,9 @@ from CONFIG import  chat
 from telebot import types
 import csv_func as csv
 
+сurators = []
+csv.read('members.csv', сurators)
+
 markup_check = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 yes_button = types.KeyboardButton('Да')
 no_button = types.KeyboardButton('Нет')
@@ -15,13 +18,6 @@ def start(message):
     mes = f'Добро пожаловать на курс, {member[0]}!\nУ вас уже есть приложение Getcourse.ru?'
 
     bot.send_message(message.chat.id, mes, reply_markup=markup_check)
-
-#    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-#    back = types.KeyboardButton('↩К началу')
-
-#    markup.add( back)
-#    bot.send_message(message.chat.id, mes, parse_mode='html', reply_markup=markup)
-
 
 
 @bot.message_handler(content_types=['text'])
@@ -242,8 +238,8 @@ def get_text(message):
     if message.text == 'На старт!':
         bot.send_message(message.chat.id, 'У вас уже есть приложение Getcourse.ru?', reply_markup=markup_check)
 
-сurators = []
-csv.read('members.csv', сurators)
+    if message.from_user.id in сurators:
+        menu.add(course, dz, info, table, again, rate, curator_сh, curator)
 
 
 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
@@ -257,7 +253,8 @@ rate = types.KeyboardButton('Рейтинг')
 curator = types.KeyboardButton('Мои участники')
 curator_сh = types.KeyboardButton('Куратор')
 
-menu.add(course, dz, info, table, again, curator_сh)
+menu.add(course, dz, info, table, again, rate, curator_сh)
+
 
 
 bot.polling(none_stop=True)
