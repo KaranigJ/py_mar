@@ -6,6 +6,24 @@ import csv_func as csv
 
 сurators = []
 csv.read('members.csv', сurators)
+print(сurators)
+
+
+
+
+menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+cmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+course = types.KeyboardButton('Инструкции к выполнению курса')
+dz = types.KeyboardButton('Инструкции к выполнению ДЗ')
+info = types.KeyboardButton('Информационный канал')
+table = types.KeyboardButton('Расписание')
+again = types.KeyboardButton('На старт!')
+rate = types.KeyboardButton('Рейтинг')
+curator = types.KeyboardButton('👨‍🏫Меню куратора👨‍🏫')
+curator_сh = types.KeyboardButton('Куратор')
+
+menu.add(course, dz, info, table, rate, curator_сh, again)
+cmenu.add(course, dz, info, table, rate, curator_сh, curator, again)
 
 markup_check = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 yes_button = types.KeyboardButton('Да')
@@ -22,7 +40,19 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def get_text(message):
+    def check(text):
+        if mem in сurators:
+            bot.send_message(message.chat.id,
+                            text,
+                             reply_markup=cmenu)
+        else:
+            bot.send_message(message.chat.id,
+                             text,
+                             reply_markup=menu)
+
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}']
+
 
     if message.text == 'Да':
         step = 0
@@ -57,8 +87,9 @@ def get_text(message):
             bot.send_message(message.chat.id, 'Введите вашу электронную почту и нажмите "получить ссылку для входа"', reply_markup=markup)
             file = open('Photo/14.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/3.gif', 'rb')
+            vid = open('Vid/3.mp4', 'rb')
             bot.send_video(message.chat.id, vid)
+
         elif count == 4:
             bot.send_message(message.chat.id, 'Перейдите в почту и найдите там письмо от Chatium.\n'
                                               'Если его нет в основных письмах проверьте папку спам.\n'
@@ -72,15 +103,17 @@ def get_text(message):
             bot.send_photo(message.chat.id, file)
             bot.send_photo(message.chat.id, file1)
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/4.gif', 'rb')
+            vid = open('Vid/4.mp4', 'rb')
             bot.send_video(message.chat.id, vid)
+
         elif count == 5:
             bot.send_message(message.chat.id, 'Возвращаемся в Getcourse и вводим полученый код в специальное поле',
                              reply_markup=markup)
             file = open('Photo/6.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/5.gif', 'rb')
+            vid = open('Vid/5.mp4', 'rb')
             bot.send_video(message.chat.id, vid)
+
         elif count == 6:
             bot.send_message(message.chat.id, 'Открываем меню избранного')
             file = open('Photo/8.png', 'rb')
@@ -92,15 +125,16 @@ def get_text(message):
                              reply_markup=markup)
             bot.send_photo(message.chat.id, file1)
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/7.gif', 'rb')
+            vid = open('Vid/7.mp4', 'rb')
             bot.send_video(message.chat.id, vid)
+
         elif count == 7:
             bot.send_message(message.chat.id,
                              'Возвращаемся назад в избранное при помощи стрелки назад на телефоне и находим там курс',
                              reply_markup=markup)
             file2 = open('Photo/11.png', 'rb')
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/8.gif', 'rb')
+            vid = open('Vid/8.mp4', 'rb')
             bot.send_video(message.chat.id, vid)
 
     def next_but_r(markup, count):
@@ -111,18 +145,21 @@ def get_text(message):
             bot.send_message(message.chat.id, 'Найдите кнопку скачать приложение', reply_markup=markup)
             file = open('Photo/1.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/1.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/1.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 2:
             bot.send_message(message.chat.id, 'Установите приложение', reply_markup=markup)
-            vid = open('Vid/2.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/2.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 3:
             bot.send_message(message.chat.id, 'Введите вашу электронную почту и нажмите "получить ссылку для входа"', reply_markup=markup)
             file = open('Photo/2.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/3.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/3.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 4:
             bot.send_message(message.chat.id, 'Перейдите в почту и найдите там письмо от Chatium.\n'
                                               'Если его нет в основных письмах проверьте папку спам.\n'
@@ -135,20 +172,23 @@ def get_text(message):
             bot.send_photo(message.chat.id, file)
             bot.send_photo(message.chat.id, file1)
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/4.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/4.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 5:
             bot.send_message(message.chat.id, 'Возвращаемся в Getcourse и вводим полученый код в специальное поле', reply_markup=markup)
             file = open('Photo/6.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/5.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/5.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 6:
             bot.send_message(message.chat.id, 'Нажимаем кнопку зарегистрироваться с помощью email', reply_markup=markup)
             file = open('Photo/7.png', 'rb')
             bot.send_photo(message.chat.id, file)
-            vid = open('Vid/6.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/6.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 7:
             bot.send_message(message.chat.id, 'Открываем меню избранного')
             file = open('Photo/8.png', 'rb')
@@ -158,14 +198,15 @@ def get_text(message):
             bot.send_message(message.chat.id, 'Находим кнопку настройка избранного и ставим галочку напротив practicumtk', reply_markup=markup)
             bot.send_photo(message.chat.id, file1)
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/7.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/7.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
+
         elif count == 8:
             bot.send_message(message.chat.id, 'Возвращаемся назад в избранное при помощи стрелки назад на телефоне и находим там курс', reply_markup=markup)
             file2 = open('Photo/11.png', 'rb')
             bot.send_photo(message.chat.id, file2)
-            vid = open('Vid/8.gif', 'rb')
-            bot.send_video(message.chat.id, vid)
+            vid = open('Vid/8.mp4', 'rb')
+            bot.send_document(message.chat.id, vid)
 
     if message.text == '1)Авторизация Далее➡':
         next_but_a(markup, 1)
@@ -181,7 +222,7 @@ def get_text(message):
         next_but_a(markup, 6)
     elif message.text == '7)Авторизация Далее➡':
         next_but_a(markup, 7)
-        bot.send_message(message.chat.id, 'Поздравляю с авторизацией на курсе!', reply_markup=menu)
+        check('Поздравляю с авторизацией на курсе!')
 
 
     if message.text == '1)Регистрация Далее➡':
@@ -200,11 +241,12 @@ def get_text(message):
         next_but_r(markup, 7)
     elif message.text == '8)Регистрация Далее➡':
         next_but_r(markup, 8)
-        bot.send_message(message.chat.id, 'Поздравляю с регистрацией на курсе!\n\nЯ ваш помощник! Вы всегда можешь обратиться ко мне за помощью😉', reply_markup=menu)
+        check('Поздравляю с регистрацией на курсе!\n\nЯ ваш помощник! Вы всегда можешь обратиться ко мне за помощью😉')
+
 
     back = types.KeyboardButton('Назад')
     if message.text == 'Назад':
-        bot.send_message(message.chat.id,'Основное меню', reply_markup=menu)
+        check('Основное меню')
 
 
     if message.text == 'Инструкции к выполнению курса':
@@ -238,24 +280,19 @@ def get_text(message):
     if message.text == 'На старт!':
         bot.send_message(message.chat.id, 'У вас уже есть приложение Getcourse.ru?', reply_markup=markup_check)
 
-    if message.from_user.id in сurators:
-        menu.add(course, dz, info, table, again, rate, curator_сh, curator)
+    if message.text == 'Куратор':
+        all_cur = types.InlineKeyboardMarkup(row_width=1)
+        gi = types.InlineKeyboardButton('Гребнева Ирина', url=link)
+        mm = types.InlineKeyboardButton('Троц Марина', url=link)
+        tk = types.InlineKeyboardButton('Кислая Татьяна', url=link)
+        el = types.InlineKeyboardButton('Вайнилович Елена', url=link)
+        nt = types.InlineKeyboardButton('Трусь Наталья', url=link)
+        sv = types.InlineKeyboardButton('Евтушик Святослав', url=link)
+        dk = types.InlineKeyboardButton('Кислый Денис', url=link)
+        ma = types.InlineKeyboardButton('Матвей', url=link)
+        all_cur.add(gi, mm, tk, el, nt, sv, dk, ma)
+        bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
-
-menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-course = types.KeyboardButton('Инструкции к выполнению курса')
-dz = types.KeyboardButton('Инструкции к выполнению ДЗ')
-info = types.KeyboardButton('Информационный канал')
-table = types.KeyboardButton('Расписание')
-again = types.KeyboardButton('На старт!')
-rate = types.KeyboardButton('Рейтинг')
-
-curator = types.KeyboardButton('Мои участники')
-curator_сh = types.KeyboardButton('Куратор')
-
-menu.add(course, dz, info, table, again, rate, curator_сh)
-
-
-
-bot.polling(none_stop=True)
 print('start')
+bot.polling(none_stop=True)
+print('stop')
