@@ -8,6 +8,9 @@ import csv_func as csv
 csv.read('members.csv', сurators)
 print(сurators)
 
+allus = []
+csv.read('alluser.csv', allus)
+
 
 
 
@@ -32,11 +35,13 @@ markup_check.add(yes_button, no_button)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    member = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}']
+    member = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
     mes = f'Добро пожаловать на курс, {member[0]}!\nУ вас уже есть приложение Getcourse.ru?'
 
     bot.send_message(message.chat.id, mes, reply_markup=markup_check)
-
+    if member not in allus:
+        allus.append(member)
+        csv.write('alluser.csv', allus)
 
 @bot.message_handler(content_types=['text'])
 def get_text(message):
