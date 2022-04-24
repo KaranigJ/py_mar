@@ -63,13 +63,13 @@ def get_text(message):
         step = 0
         next = types.KeyboardButton(f'{step+1})Авторизация Далее➡')
         markup.add(next)
-        bot.send_message(message.chat.id, 'Первый шаг к авторизации. Если вы перепутали кнопку, дойдите до конца регистрации не выполняя пунктов,'
+        bot.send_message(message.chat.id, 'Первый шаг к авторизации.\n\n Если вы перепутали кнопку, дойдите до конца регистрации не выполняя пунктов,'
                                           ' а затем выберите кнопку "На старт!"', reply_markup=markup)
     elif message.text == 'Нет':
         step = 0
         next = types.KeyboardButton(f'{step + 1})Регистрация Далее➡')
         markup.add(next)
-        bot.send_message(message.chat.id, 'Первый шаг. Если вы перепутали кнопку, дойдите до конца регистрации не выполняя пунктов,'
+        bot.send_message(message.chat.id, 'Первый шаг к регистрации.\n\n Если вы перепутали кнопку, дойдите до конца регистрации не выполняя пунктов,'
                                           ' а затем выберите кнопку "На старт!"')
         markup_get = types.InlineKeyboardMarkup()
         markup_get.add(types.InlineKeyboardButton('Перейти к регистрации', url=link))
@@ -294,7 +294,7 @@ def get_text(message):
         nt = types.InlineKeyboardButton('Трусь Наталья', url=link)
         sv = types.InlineKeyboardButton('Евтушик Святослав', url=link)
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
-        ma = types.InlineKeyboardButton('Матвей', url=link)
+        ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
         all_cur.add(gi, mm, tk, el, nt, sv, dk, ma)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
