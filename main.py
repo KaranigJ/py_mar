@@ -33,6 +33,16 @@ yes_button = types.KeyboardButton('Да')
 no_button = types.KeyboardButton('Нет')
 markup_check.add(yes_button, no_button)
 
+text = 'Через 30 минут появится инструкция к домашнему заданию номер 1.' \
+       ' Найти её можно будет в меню по кнопке "Инструкции к выполнению ДЗ".'
+photo = open('Photo/ph.png')
+
+@bot.message_handler(commands=['send'])
+def send():
+    for i in range(len(allus)):
+        bot.send_message(allus[i][2], text)
+        bot.send_photo(allus[i][2], photo)
+
 @bot.message_handler(commands=['start'])
 def start(message):
     member = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
@@ -324,6 +334,10 @@ def get_text(message):
                                             '9. Бизнес-вход Базовый – 160 баллов\n'
                                             '10. Бизнес-вход Быстрый старт – 360 баллов\n'
                                             '11. Годовая бизнес активность – 20 баллов\n')
+
+        if message.text == 'Домашнее задание номер 1':
+            vid = open('Vid/vid9.mp4', 'rb')
+            bot.send_video(message.chat.id, vid)
 
 print('start')
 bot.polling(none_stop=True)
