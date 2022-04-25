@@ -336,6 +336,7 @@ def get_text(message):
 
         if message.text == 'Домашнее задание номер 1':
             v = open('Vid/9.mp4', 'rb')
+            bot.send_message(message.chat.id, 'Подождите пока придёт файл.')
             bot.send_video(message.chat.id, v)
 
 print('start')
