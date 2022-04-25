@@ -63,7 +63,10 @@ def get_text(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}']
 
-
+    if message.chat.id == 405934214 or message.chat.id == 443257481:
+        txt = message.text
+        for i in range(len(allus)):
+            bot.send_message(allus[i][1], txt)
 
     if message.text == 'Да':
         step = 0
@@ -258,7 +261,6 @@ def get_text(message):
     back = types.KeyboardButton('Назад')
     if message.text == 'Назад':
         check('Основное меню')
-        print(f'{message.chat.id}  :  {message.from_user.id}')
 
 
     if message.text == 'Инструкции к выполнению курса':
