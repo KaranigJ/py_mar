@@ -6,12 +6,9 @@ import csv_func as csv
 
 сurators = []
 csv.read('members.csv', сurators)
-print(сurators)
 
 allus = []
 csv.read('alluser.csv', allus)
-
-
 
 
 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
@@ -35,14 +32,11 @@ markup_check.add(yes_button, no_button)
 
 text = 'Через 30 минут появится инструкция к домашнему заданию номер 1.' \
        ' Найти её можно будет в меню по кнопке "Инструкции к выполнению ДЗ".'
-photo = open('Photo/ph.png')
 
 @bot.message_handler(commands=['send'])
 def send(message):
     for i in range(len(allus)):
-        print(allus[i][2])
-      #  bot.send_message(allus[i][2], text)
-       # bot.send_photo(allus[i][2], photo)
+        bot.send_message(allus[i][1], text)
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -68,6 +62,7 @@ def get_text(message):
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}']
+
 
 
     if message.text == 'Да':
@@ -263,6 +258,7 @@ def get_text(message):
     back = types.KeyboardButton('Назад')
     if message.text == 'Назад':
         check('Основное меню')
+        print(message.chat.id + ':' + message.from_user.id)
 
 
     if message.text == 'Инструкции к выполнению курса':
