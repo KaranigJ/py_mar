@@ -40,8 +40,9 @@ photo = open('Photo/ph.png')
 @bot.message_handler(commands=['send'])
 def send(message):
     for i in range(len(allus)):
-        bot.send_message(allus[i][2], text)
-        bot.send_photo(allus[i][2], photo)
+        print(allus[i][2])
+      #  bot.send_message(allus[i][2], text)
+       # bot.send_photo(allus[i][2], photo)
 
 @bot.message_handler(commands=['start'])
 def start(message):
