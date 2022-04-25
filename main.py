@@ -1,6 +1,6 @@
 from CONFIG import bot
 from CONFIG import link
-from CONFIG import  chat
+from CONFIG import chat
 from telebot import types
 import csv_func as csv
 
@@ -288,10 +288,10 @@ def get_text(message):
     if message.text == 'Куратор':
         all_cur = types.InlineKeyboardMarkup(row_width=1)
         gi = types.InlineKeyboardButton('Гребнева Ирина', url=link)
-        mm = types.InlineKeyboardButton('Троц Марина', url=link)
+        mm = types.InlineKeyboardButton('Троц Марина', url='https://t.me/+uxYWaMlr5RoxOTBi')
         tk = types.InlineKeyboardButton('Кислая Татьяна', url=link)
         el = types.InlineKeyboardButton('Вайнилович Елена', url=link)
-        nt = types.InlineKeyboardButton('Трусь Наталья', url=link)
+        nt = types.InlineKeyboardButton('Трусь Наталья', url='https://t.me/+F29DwEh9J0Q5MGUy')
         sv = types.InlineKeyboardButton('Евтушик Святослав', url=link)
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
