@@ -258,7 +258,7 @@ def get_text(message):
     back = types.KeyboardButton('Назад')
     if message.text == 'Назад':
         check('Основное меню')
-        print(message.chat.id + ':' + message.from_user.id)
+        print(f'{message.chat.id}  :  {message.from_user.id}')
 
 
     if message.text == 'Инструкции к выполнению курса':
