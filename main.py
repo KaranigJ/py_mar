@@ -335,8 +335,8 @@ def get_text(message):
                                             '11. Годовая бизнес активность – 20 баллов\n')
 
         if message.text == 'Домашнее задание номер 1':
-            vid = open('Vid/vid9.mp4', 'rb')
-            bot.send_video(message.chat.id, vid)
+            v = open('Vid/9.mp4', 'rb')
+            bot.send_video(message.chat.id, v)
 
 print('start')
 bot.polling(none_stop=True)
