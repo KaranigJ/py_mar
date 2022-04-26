@@ -35,6 +35,7 @@ text = 'Уважаемые кураторы! По кнопке "Мои учас�
 @bot.message_handler(commands=['send'])
 def send(message):
     for i in range(len(сurators)):
+        print(сurators[i][1])
         bot.send_message(сurators[i][1], text)
 
 @bot.message_handler(commands=['start'])
