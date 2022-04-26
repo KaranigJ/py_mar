@@ -30,13 +30,12 @@ yes_button = types.KeyboardButton('Да')
 no_button = types.KeyboardButton('Нет')
 markup_check.add(yes_button, no_button)
 
-text = 'Через 30 минут появится инструкция к домашнему заданию номер 1.' \
-       ' Найти её можно будет в меню по кнопке "Инструкции к выполнению ДЗ".'
+text = 'Уважаемые кураторы! По кнопке "Мои участники" в вашем меню доступна таблици с их ответами'
 
 @bot.message_handler(commands=['send'])
 def send(message):
-    for i in range(len(allus)):
-        bot.send_message(allus[i][1], text)
+    for i in range(len(сurators)):
+        bot.send_message(сurators[i][1], text)
 
 @bot.message_handler(commands=['start'])
 def start(message):
