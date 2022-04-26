@@ -63,7 +63,7 @@ def get_text(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}']
 
-    if message.chat.id == 405934214 or message.chat.id == 443257481:
+    if message.chat.id == 443257481:
         txt = message.text
         for i in range(len(allus)):
             bot.send_message(allus[i][1], txt)
@@ -317,6 +317,26 @@ def get_text(message):
 
     if message.text == '👨‍🏫Меню куратора👨‍🏫':
         bot.send_message(message.chat.id, 'Меню кураторов', reply_markup=curmenu)
+
+    if message.text == 'Мои участники':
+        if message.chat.id == 742739821: #Гребнева
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1P_wW6kwpj5QXOPYWAmc2NyuOjj7SnQ-4u42fM6KJ8bI/edit?usp=sharing')
+        elif message.chat.id == 1383469137:#Троц
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1_vUmD-MiKx2Kpubvies9-qym6mdRp2sZqZURe_QLjkg/edit?usp=sharing')
+        elif message.chat.id == 1121927226:#Евтушик
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1z8F433XA4pqMscGHmP9h_sWgbkAIYgNX03SLGO_AQU8/edit?usp=sharing')
+        elif message.chat.id == 650172724:#Трусь
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1WIZdBedtZvAkXD1xSnbVjgFM2q2cII0oQYKHQO5iips/edit?usp=sharing')
+        elif message.chat.id == 315332801:#Вайнилович
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
+        elif message.chat.id == 405934214:#Я
+           bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
 
     if message.text == 'Мои участники':
         bot.send_message(message.chat.id, 'Информация появится позже')
