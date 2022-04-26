@@ -296,7 +296,7 @@ def get_text(message):
 
     if message.text == 'Куратор':
         all_cur = types.InlineKeyboardMarkup(row_width=1)
-        gi = types.InlineKeyboardButton('Гребнева Ирина', url=link)
+        gi = types.InlineKeyboardButton('Гребнева Ирина', url='https://t.me/+_Prgd1rS2Uc3MTQy')
         mm = types.InlineKeyboardButton('Троц Марина', url='https://t.me/+uxYWaMlr5RoxOTBi')
         tk = types.InlineKeyboardButton('Кислая Татьяна', url=link)
         el = types.InlineKeyboardButton('Вайнилович Елена', url='https://t.me/+JTyr8ADNZ_E0ZDEy')
