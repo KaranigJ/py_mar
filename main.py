@@ -299,12 +299,12 @@ def get_text(message):
         gi = types.InlineKeyboardButton('Гребнева Ирина', url=link)
         mm = types.InlineKeyboardButton('Троц Марина', url='https://t.me/+uxYWaMlr5RoxOTBi')
         tk = types.InlineKeyboardButton('Кислая Татьяна', url=link)
-        el = types.InlineKeyboardButton('Вайнилович Елена', url=link)
+        el = types.InlineKeyboardButton('Вайнилович Елена', url='https://t.me/+JTyr8ADNZ_E0ZDEy')
         nt = types.InlineKeyboardButton('Трусь Наталья', url='https://t.me/+F29DwEh9J0Q5MGUy')
-        sv = types.InlineKeyboardButton('Евтушик Святослав', url=link)
+        sv = types.InlineKeyboardButton('Евтушик Святослав', url='https://t.me/sonarostaes')
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
-        all_cur.add(gi, mm, tk, el, nt, sv, dk, ma)
+        all_cur.add(gi, mm, el, nt, sv)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
     if message.text == 'Рейтинг':
