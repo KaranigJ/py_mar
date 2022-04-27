@@ -302,9 +302,10 @@ def get_text(message):
         el = types.InlineKeyboardButton('Вайнилович Елена', url='https://t.me/+JTyr8ADNZ_E0ZDEy')
         nt = types.InlineKeyboardButton('Трусь Наталья', url='https://t.me/+F29DwEh9J0Q5MGUy')
         sv = types.InlineKeyboardButton('Евтушик Святослав', url='https://t.me/sonarostaes')
+        kl = types.InlineKeyboardButton('Котусова Людмила', url='https://t.me/LiudmilaKotusova')
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
-        all_cur.add(gi, mm, el, nt, sv)
+        all_cur.add(gi, mm, el, nt, sv, kl)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
     if message.text == 'Рейтинг':
@@ -333,28 +334,38 @@ def get_text(message):
         if message.chat.id == 742739821: #Гребнева
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1P_wW6kwpj5QXOPYWAmc2NyuOjj7SnQ-4u42fM6KJ8bI/edit?usp=sharing')
-
+            for i in range(len(greb)):
+                text = f'{greb[i][0]} : {float(greb[i][1])}'
+                bot.send_message(message.chat.id, text)
         elif message.chat.id == 1383469137:#Троц
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1_vUmD-MiKx2Kpubvies9-qym6mdRp2sZqZURe_QLjkg/edit?usp=sharing')
-            bot.send_message(message.chat.id, text)
+            for i in range(len(troc)):
+                text = f'{troc[i][0]} : {float(troc[i][1])}'
+                bot.send_message(message.chat.id, text)
         elif message.chat.id == 1121927226:#Евтушик
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1z8F433XA4pqMscGHmP9h_sWgbkAIYgNX03SLGO_AQU8/edit?usp=sharing')
-            bot.send_message(message.chat.id, text)
+            for i in range(len(evtu)):
+                text = f'{evtu[i][0]} : {float(evtu[i][1])}'
+                bot.send_message(message.chat.id, text)
         elif message.chat.id == 650172724:#Трусь
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1WIZdBedtZvAkXD1xSnbVjgFM2q2cII0oQYKHQO5iips/edit?usp=sharing')
-            bot.send_message(message.chat.id, text)
+            for i in range(len(trus)):
+                text = f'{trus[i][0]} : {float(trus[i][1])}'
+                bot.send_message(message.chat.id, text)
         elif message.chat.id == 315332801:#Вайнилович
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
-            bot.send_message(message.chat.id, text)
+            for i in range(len(vain)):
+                text = f'{vain[i][0]} : {float(vain[i][1])}'
+                bot.send_message(message.chat.id, text)
         elif message.chat.id == 405934214:#Я
            bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
            for i in range(len(greb)):
-               text = f'{greb[i][0]} : {greb[i][1]}'
+               text = f'{greb[i][0]} : {float(greb[i][1])}'
                bot.send_message(message.chat.id, text)
 
     elif message.text == 'Информация📚':
