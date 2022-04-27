@@ -10,6 +10,7 @@ csv.read('members.csv', сurators)
 allus = []
 csv.read('alluser.csv', allus)
 
+crmen = '👨‍🏫Меню куратора👨‍🏫‍'
 
 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 cmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
@@ -19,7 +20,7 @@ info = types.KeyboardButton('Информационный канал')
 table = types.KeyboardButton('Расписание')
 again = types.KeyboardButton('На старт!')
 rate = types.KeyboardButton('Рейтинг')
-curator = types.KeyboardButton('👨‍🏫Меню куратора‍')
+curator = types.KeyboardButton(crmen)
 curator_сh = types.KeyboardButton('Куратор')
 
 menu.add(course, dz, info, table, rate, curator_сh, again)
@@ -311,12 +312,14 @@ def get_text(message):
     if message.text == 'Рейтинг':
         bot.send_message(message.chat.id, 'Тут пока ничего. Информация появится после выполнения 1 задания.')
 
+
     curmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     mymem = types.KeyboardButton('Мои участники')
     curinfo = types.KeyboardButton('Информация📚')
     curmenu.add(mymem, curinfo, back)
 
-    if message.text == '👨‍🏫Меню куратора':
+    if message.text == crmen:
+        print('Curator')
         bot.send_message(message.chat.id, 'Меню кураторов', reply_markup=curmenu)
 
     greb = []
