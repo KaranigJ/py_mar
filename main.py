@@ -19,7 +19,7 @@ info = types.KeyboardButton('Информационный канал')
 table = types.KeyboardButton('Расписание')
 again = types.KeyboardButton('На старт!')
 rate = types.KeyboardButton('Рейтинг')
-curator = types.KeyboardButton('👨‍🏫Меню куратора👨‍🏫')
+curator = types.KeyboardButton('👨‍🏫Меню куратора‍')
 curator_сh = types.KeyboardButton('Куратор')
 
 menu.add(course, dz, info, table, rate, curator_сh, again)
@@ -302,10 +302,9 @@ def get_text(message):
         el = types.InlineKeyboardButton('Вайнилович Елена', url='https://t.me/+JTyr8ADNZ_E0ZDEy')
         nt = types.InlineKeyboardButton('Трусь Наталья', url='https://t.me/+F29DwEh9J0Q5MGUy')
         sv = types.InlineKeyboardButton('Евтушик Святослав', url='https://t.me/sonarostaes')
-        kl = types.InlineKeyboardButton('Котусова Людмила', url='@LiudmilaKotusova')
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
-        all_cur.add(gi, mm, el, nt, sv,kl)
+        all_cur.add(gi, mm, el, nt, sv)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
     if message.text == 'Рейтинг':
@@ -316,34 +315,48 @@ def get_text(message):
     curinfo = types.KeyboardButton('Информация📚')
     curmenu.add(mymem, curinfo, back)
 
-    if message.text == '👨‍🏫Меню куратора👨‍🏫':
+    if message.text == '👨‍🏫Меню куратора':
         bot.send_message(message.chat.id, 'Меню кураторов', reply_markup=curmenu)
+
+    greb = []
+    csv.read('Curator/Гребнева.csv', greb)
+    troc = []
+    csv.read('Curator/Троц.csv', troc)
+    evtu= []
+    csv.read('Curator/Евтушик.csv', evtu)
+    trus = []
+    csv.read('Curator/Трусь.csv', trus)
+    vain = []
+    csv.read('Curator/Вайнилович.csv', vain)
 
     if message.text == 'Мои участники':
         if message.chat.id == 742739821: #Гребнева
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1P_wW6kwpj5QXOPYWAmc2NyuOjj7SnQ-4u42fM6KJ8bI/edit?usp=sharing')
+
         elif message.chat.id == 1383469137:#Троц
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1_vUmD-MiKx2Kpubvies9-qym6mdRp2sZqZURe_QLjkg/edit?usp=sharing')
+            bot.send_message(message.chat.id, text)
         elif message.chat.id == 1121927226:#Евтушик
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1z8F433XA4pqMscGHmP9h_sWgbkAIYgNX03SLGO_AQU8/edit?usp=sharing')
+            bot.send_message(message.chat.id, text)
         elif message.chat.id == 650172724:#Трусь
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1WIZdBedtZvAkXD1xSnbVjgFM2q2cII0oQYKHQO5iips/edit?usp=sharing')
+            bot.send_message(message.chat.id, text)
         elif message.chat.id == 315332801:#Вайнилович
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
-        elif message.chat.id == 531433683:#Котусова
-           bot.send_message(message.chat.id,
-                             'https://docs.google.com/spreadsheets/d/1okvXQp8e8OjxHhtA2WBNR4kLNYlSSb3sBiO4izZcdMQ/edit?usp=sharing')
+            bot.send_message(message.chat.id, text)
         elif message.chat.id == 405934214:#Я
            bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
+           for i in range(len(greb)):
+               text = f'{greb[i][0]} : {greb[i][1]}'
+               bot.send_message(message.chat.id, text)
 
-    if message.text == 'Мои участники':
-        bot.send_message(message.chat.id, 'Информация появится позже')
     elif message.text == 'Информация📚':
         bot.send_message(message.chat.id, 'Дополнительное начисление баллов за приобретённую продукцию:\n'
                                             '1. пакет Начальный – 20 баллов\n'
@@ -358,10 +371,10 @@ def get_text(message):
                                             '10. Бизнес-вход Быстрый старт – 360 баллов\n'
                                             '11. Годовая бизнес активность – 20 баллов\n')
 
-        if message.text == 'Домашнее задание номер 1':
-            v = open('Vid/9.mp4', 'rb')
-            bot.send_message(message.chat.id, 'Подождите пока придёт файл.')
-            bot.send_video(message.chat.id, v)
+    if message.text == 'Домашнее задание номер 1':
+        v = open('Vid/9.mp4', 'rb')
+        bot.send_message(message.chat.id, 'Подождите пока придёт файл.')
+        bot.send_video(message.chat.id, v)
 
 print('start')
 bot.polling(none_stop=True)
