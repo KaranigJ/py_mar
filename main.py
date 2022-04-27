@@ -302,9 +302,10 @@ def get_text(message):
         el = types.InlineKeyboardButton('Вайнилович Елена', url='https://t.me/+JTyr8ADNZ_E0ZDEy')
         nt = types.InlineKeyboardButton('Трусь Наталья', url='https://t.me/+F29DwEh9J0Q5MGUy')
         sv = types.InlineKeyboardButton('Евтушик Святослав', url='https://t.me/sonarostaes')
+        kl = types.InlineKeyboardButton('Котусова Людмила', url='@LiudmilaKotusova')
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
-        all_cur.add(gi, mm, el, nt, sv)
+        all_cur.add(gi, mm, el, nt, sv,kl)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
     if message.text == 'Рейтинг':
@@ -334,6 +335,9 @@ def get_text(message):
         elif message.chat.id == 315332801:#Вайнилович
             bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
+        elif message.chat.id == 531433683:#Котусова
+           bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1okvXQp8e8OjxHhtA2WBNR4kLNYlSSb3sBiO4izZcdMQ/edit?usp=sharing')
         elif message.chat.id == 405934214:#Я
            bot.send_message(message.chat.id,
                              'https://docs.google.com/spreadsheets/d/1577Jea9eSXLxc7Zs7FTm4loSs63uleGf7iacRNmNgWI/edit?usp=sharing')
