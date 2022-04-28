@@ -1,5 +1,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import pprint
+import csv_func as csv
 
 scope = [
 'https://www.googleapis.com/auth/spreadsheets',
@@ -8,8 +10,60 @@ scope = [
 my_creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(my_creds)
 
-sheet = client.open('Maraphon_2').sheet1
+prt = pprint.PrettyPrinter()
 
-get_data = sheet.get_all_records()
+def getf(num):
+    curators = client.open('Maraphon_2').get_worksheet(num)
+    get = curators.col_values(2)
+    return get
+def get_cf(num):
+    curators = client.open('Maraphon_2').get_worksheet(num)
+    get_c = curators.col_values(6)
+    return get_c
 
-print(get_data)
+def rep(members):
+    for i in range(len(members)):
+        members[i][1] = members[i][1].replace(',','.')
+        members[i][1] = members[i][1].replace('"','')
+    return members
+
+get = getf(6)
+get_c = get_cf(6)
+trus = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(trus)
+csv.write('Curator/Трусь.csv', trus)
+
+get = getf(2)
+get_c = get_cf(2)
+troc = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(troc)
+csv.write('Curator/Троц.csv', troc)
+
+get = getf(3)
+get_c = get_cf(3)
+vain = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(vain)
+csv.write('Curator/Вайнилович.csv', vain)
+
+get = getf(4)
+get_c = get_cf(4)
+evtu = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(evtu)
+csv.write('Curator/Евтушик.csv', evtu)
+
+get = getf(7)
+get_c = get_cf(7)
+greb = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(greb)
+csv.write('Curator/Гребнева.csv', greb)
+
+get = getf(5)
+get_c = get_cf(5)
+kots = [[get[i], get_c[i]] for i in range(2, len(get_c))]
+rep(kots)
+csv.write('Curator/Котусова.csv', kots)
+
+
+
+
+
