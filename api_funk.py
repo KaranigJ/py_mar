@@ -1,12 +1,14 @@
 import gspread
-from oauth2client.service.account import ServiceAccountCredentials
+from oauth2client.service_account import ServiceAccountCredentials
 
-
-link = ['https://docs.google.com/spreadsheets/d/1Bk92HaMzh6zD4N8igXZbyK3BiSYzw_wA17rS2BuNTko/edit#gid=229531669']
-my_creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', link)
+scope = [
+'https://www.googleapis.com/auth/spreadsheets',
+'https://www.googleapis.com/auth/drive'
+]
+my_creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(my_creds)
 
-sheet = client.open('Копия Марафон, поток 2 - 25.04.22').sheet1
+sheet = client.open('Maraphon_2').sheet1
 
 get_data = sheet.get_all_records()
 
