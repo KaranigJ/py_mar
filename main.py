@@ -332,6 +332,8 @@ def get_text(message):
     csv.read('Curator/Трусь.csv', trus)
     vain = []
     csv.read('Curator/Вайнилович.csv', vain)
+    kots = []
+    csv.read('Curator/Котусова.csv', kots)
 
     if message.text == 'Мои участники':
         if message.chat.id == 742739821: #Гребнева
@@ -339,6 +341,13 @@ def get_text(message):
                              'https://docs.google.com/spreadsheets/d/1P_wW6kwpj5QXOPYWAmc2NyuOjj7SnQ-4u42fM6KJ8bI/edit?usp=sharing')
             for i in range(len(greb)):
                 text = f'{greb[i][0]} : {float(greb[i][1])}'
+                bot.send_message(message.chat.id, text)
+    if message.text == 'Мои участники':
+        if message.chat.id == 531433683: #Котусова
+            bot.send_message(message.chat.id,
+                             'https://docs.google.com/spreadsheets/d/1P_wW6kwpj5QXOPYWAmc2NyuOjj7SnQ-4u42fM6KJ8bI/edit?usp=sharing')
+            for i in range(len(kots)):
+                text = f'{kots[i][0]} : {float(kots[i][1])}'
                 bot.send_message(message.chat.id, text)
         elif message.chat.id == 1383469137:#Троц
             bot.send_message(message.chat.id,
