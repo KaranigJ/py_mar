@@ -289,7 +289,6 @@ def get_text(message):
         ch_markup.add(types.InlineKeyboardButton('Информационный канал', url=chat))
         bot.send_message(message.chat.id, 'Марафон "Кризис. Зона роста."', reply_markup=ch_markup)
     elif message.text == 'Расписание':
-
         bot.send_message(message.chat.id, '<b>25 апреля:</b> Кризис и главный фактор риска\n<b>28 апреля:</b> Кризис и финансы\n'
                                           '<b>02 мая:</b> Кризис. Трамплин к мечте\n<b>04 мая:</b> Кризис. Прорыв\n<b>05 мая:</b> Кризис. За линией страха',
                          parse_mode='html')
@@ -310,8 +309,14 @@ def get_text(message):
         all_cur.add(gi, mm, el, nt, sv, kl)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
+    all = []
+    csv.read('Curator/All.csv', all)
+
     if message.text == 'Рейтинг':
-        bot.send_message(message.chat.id, 'Тут пока ничего. Информация появится после выполнения 1 задания.')
+        bot.send_message(message.chat.id, 'Место: Участник : Баллы')
+        for i in range(len(all)):
+            text = f'{i+1}: {all[i][0]} : {float(all[i][1])}'
+            bot.send_message(message.chat.id, text)
 
 
     curmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)

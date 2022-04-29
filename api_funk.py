@@ -1,6 +1,5 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import pprint
 import csv_func as csv
 
 scope = [
@@ -9,8 +8,6 @@ scope = [
 ]
 my_creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
 client = gspread.authorize(my_creds)
-
-prt = pprint.PrettyPrinter()
 
 def getf(num):
     curators = client.open('Maraphon_2').get_worksheet(num)
@@ -26,6 +23,9 @@ def rep(members):
         members[i][1] = members[i][1].replace(',','.')
         members[i][1] = members[i][1].replace('"','')
     return members
+
+print('---------------------START--------------------')
+
 
 get = getf(6)
 get_c = get_cf(6)
@@ -62,6 +62,25 @@ get_c = get_cf(5)
 kots = [[get[i], get_c[i]] for i in range(2, len(get_c))]
 rep(kots)
 csv.write('Curator/Котусова.csv', kots)
+
+
+def cust(count):
+    return count[1]
+def floating(list):
+    for item in list:
+        item[1] = float(item[1])
+    return list
+
+get = getf(0)
+get_c = get_cf(0)
+all = [[get[i], get_c[i]] for i in range(1, len(get_c))]
+rep(all)
+all = floating(all)
+all.sort(reverse=True, key=cust)
+csv.write('Curator/All.csv', all)
+
+print('----------------------END---------------------')
+
 
 
 
