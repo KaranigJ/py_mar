@@ -15,7 +15,7 @@ def getf(num):
     return get
 def get_cf(num):
     curators = client.open('Maraphon_2').get_worksheet(num)
-    get_c = curators.col_values(6)
+    get_c = curators.col_values(16)
     return get_c
 
 def rep(members):
