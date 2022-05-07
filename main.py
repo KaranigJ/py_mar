@@ -4,8 +4,9 @@ from CONFIG import chat
 from telebot import types
 import csv_func as csv
 
-сurators = []
-csv.read('members.csv', сurators)
+
+curators = []
+csv.read('members.csv', curators)
 
 allus = []
 csv.read('alluser.csv', allus)
@@ -14,7 +15,7 @@ crmen = '👨‍🏫Меню куратора‍'
 
 menu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 cmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-inf = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+inf = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 curmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 dz_markap = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 quests = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
@@ -48,55 +49,67 @@ back = types.KeyboardButton('Назад')
 curmenu.add(mymem, curinfo, back)
 inf.add(table, course, dz, info, back)
 menu.add(quest_b, rate, curator_сh, infmenu)
-cmenu.add(quest_b, rate, curator_сh, curator, infmenu)
+cmenu.add(quest_b, rate, curator, infmenu)
 dz_markap.add(dz1, back)
 quests.add(q1, q2, q3, q4, back)
 
-@bot.message_handler(commands=['send'])
-def send(message):
-    text = 'Уважаемый куратор! Статистика ответов по 1 заданию и баллы обновлены.' \
-           ' Вы можете найти всю информацию в "меню куратора" по кнопкам "Мои участники" меню.'
-    for i in range(len(сurators)):
-        print(сurators[i][0])
-        bot.send_message(сurators[i][1], text)
+
+def sending(message):
+    text = message.text
+    if bool == True:
+        if message.chat.id == 405934214:
+            for i in range(len(allus)):
+                bot.send_message(allus[i][1], text)
+    elif bool == False:
+        if message.chat.id == 405934214:
+            for i in range(len(curators)):
+                bot.send_message(curators[i][1], text)
+    else:
+        bot.send_message(message.chat.id, 'Error')
+
+
+@bot.message_handler(commands=['asend'])
+def asend(message):
+    bool(1)
+    msg = bot.send_message(message.chat.id, 'Сообщение всем')
+    bot.register_next_step_handler(msg, sending)
+@bot.message_handler(commands=['csend'])
+def csend(message):
+    bool(0)
+    msg = bot.send_message(message.chat.id, 'Сообщение кураторам')
+    bot.register_next_step_handler(msg, sending)
+
+def check(text, message):
+    mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
+    if mem in curators:
+        bot.send_message(message.chat.id,
+                        text,
+                         reply_markup=cmenu)
+    else:
+        bot.send_message(message.chat.id,
+                         text,
+                         reply_markup=menu)
 
 def guser(message):
     user = [message.text]
     csv.rewrite('users.csv', user)
-    bot.send_message(message.chat.id, 'Данные получены', reply_markup=menu)
+    check('Данные получены', message)
 
 @bot.message_handler(commands=['start'])
 def start(message):
     member = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
 
-    if member not in сurators:
-        сurators.append(member)
-        csv.write('members.csv', сurators)
+    if member not in allus:
+        allus.append(member)
+        csv.write('alluser.csv', allus)
 
-    msg = bot.send_message(message.chat.id, 'Напишите ваше имя')
+    msg = bot.send_message(message.chat.id, 'Напишите ваше имя и фамилию')
     bot.register_next_step_handler(msg, guser)
 
 @bot.message_handler(content_types=['text'])
 def get_text(message):
-    def check(text):
-        mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
-        if mem in сurators:
-            bot.send_message(message.chat.id,
-                            text,
-                             reply_markup=cmenu)
-        else:
-            bot.send_message(message.chat.id,
-                             text,
-                             reply_markup=menu)
-
-    if message.chat.id == 443257481:
-        txt = message.text
-        for i in range(len(allus)):
-            bot.send_message(allus[i][1], txt)
-
-
     if message.text == 'Назад':
-        check('Основное меню')
+        check('Основное меню', message)
 
     if message.text == 'Задания':
         bot.send_message(message.chat.id, 'Задания:', reply_markup=quests)
@@ -149,7 +162,7 @@ def get_text(message):
         kl = types.InlineKeyboardButton('Котусова Людмила', url='https://t.me/LiudmilaKotusova')
         dk = types.InlineKeyboardButton('Кислый Денис', url=link)
         ma = types.InlineKeyboardButton('Левкович Матвей', url=link)
-        ki = types.InlineKeyboardButton('Кузьминский Игорь', url=link)
+        ki = types.InlineKeyboardButton('Кузминский Игорь', url=link)
         all_cur.add(ma, sv, mm, dk, ki)
         bot.send_message(message.chat.id, 'Выберите вашего куратора', reply_markup=all_cur)
 
