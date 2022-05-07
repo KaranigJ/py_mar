@@ -8,8 +8,14 @@ def read(filename, list):
             list.append(row)
 
 
-def write(filename, members):
+def write(filename, list):
     with open(filename, 'w', newline='',  encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
-        for line in members:
+        for line in list:
             writer.writerow(line)
+
+def rewrite(filename, newtext):
+    temp = []
+    read(filename, temp)
+    temp.append(newtext)
+    write(filename, temp)
