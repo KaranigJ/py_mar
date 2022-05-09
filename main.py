@@ -19,6 +19,7 @@ inf = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 curmenu = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 dz_markap = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 quests = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+choose = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 
 infmenu = types.KeyboardButton('Информация')
 rate = types.KeyboardButton('Рейтинг')
@@ -31,8 +32,8 @@ curinfo = types.KeyboardButton('Информация📚')
 
 table = types.KeyboardButton('Расписание')
 course = types.KeyboardButton('Инструкции к выполнению курса')
-dz = types.KeyboardButton('Инструкции к выполнению ДЗ')
-info = types.KeyboardButton('Информационный канал')
+dz = types.KeyboardButton('Инструкции к выполнению ДЗ')#TODO: add later
+info = types.KeyboardButton('Информационный канал')#TODO: add later
 
 dz1 = types.KeyboardButton('Домашнее задание номер 1')
 #    dz2 = types.KeyboardButton('Домашнее задание номер 2')
@@ -44,40 +45,43 @@ q2 = types.KeyboardButton('Задание номер 2')
 q3 = types.KeyboardButton('Задание номер 3')
 q4 = types.KeyboardButton('Задание номер 4')
 
+DK = types.InlineKeyboardButton('Денис Кислый')
+IK = types.InlineKeyboardButton('Кузминский Игорь')
+ML = types.InlineKeyboardButton('Левкович Матвей')
+MT = types.InlineKeyboardButton('Троц Марина')
+ES = types.InlineKeyboardButton('Евтошик Святослав')
+
 back = types.KeyboardButton('Назад')
 
 curmenu.add(mymem, curinfo, back)
-inf.add(table, course, dz, info, back)
+inf.add(table, course, back)
 menu.add(quest_b, rate, curator_сh, infmenu)
 cmenu.add(quest_b, rate, curator, infmenu)
 dz_markap.add(dz1, back)
 quests.add(q1, q2, q3, q4, back)
+choose.add(DK, IK, ML, MT, ES)
 
 
-def sending(message):
+def asending(message):
     text = message.text
-    if bool == True:
-        if message.chat.id == 405934214:
-            for i in range(len(allus)):
-                bot.send_message(allus[i][1], text)
-    elif bool == False:
-        if message.chat.id == 405934214:
-            for i in range(len(curators)):
-                bot.send_message(curators[i][1], text)
-    else:
-        bot.send_message(message.chat.id, 'Error')
+    if message.chat.id == 405934214 or message.chat.id == 443257481:
+        for i in range(len(allus)):
+            bot.send_message(allus[i][1], text)
+def csending(message):
+    text = message.text
+    if message.chat.id == 405934214 or message.chat.id == 443257481:
+        for i in range(len(curators)):
+            bot.send_message(curators[i][1], text)
 
 
 @bot.message_handler(commands=['asend'])
 def asend(message):
-    bool(1)
     msg = bot.send_message(message.chat.id, 'Сообщение всем')
-    bot.register_next_step_handler(msg, sending)
+    bot.register_next_step_handler(msg, asending)
 @bot.message_handler(commands=['csend'])
 def csend(message):
-    bool(0)
     msg = bot.send_message(message.chat.id, 'Сообщение кураторам')
-    bot.register_next_step_handler(msg, sending)
+    bot.register_next_step_handler(msg, csending)
 
 def check(text, message):
     mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
@@ -115,13 +119,13 @@ def get_text(message):
         bot.send_message(message.chat.id, 'Задания:', reply_markup=quests)
 
     if message.text == 'Задание номер 1':
-        bot.send_message(message.chat.id, '1')
+        bot.send_message(message.chat.id, 'Задание пока недоступно')
     elif message.text == 'Задание номер 2':
-        bot.send_message(message.chat.id, '2')
+        bot.send_message(message.chat.id, 'Задание пока недоступно')
     elif message.text == 'Задание номер 3':
-        bot.send_message(message.chat.id, '3')
+        bot.send_message(message.chat.id, 'Задание пока недоступно')
     elif message.text == 'Задание номер 4':
-        bot.send_message(message.chat.id, '4')
+        bot.send_message(message.chat.id, 'Задание пока недоступно')
 
     if message.text == 'Информация':
         bot.send_message(message.chat.id, 'Информационные меню', reply_markup=inf)
