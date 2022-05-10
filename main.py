@@ -83,6 +83,7 @@ def csend(message):
     msg = bot.send_message(message.chat.id, 'Сообщение кураторам')
     bot.register_next_step_handler(msg, csending)
 
+
 def check(text, message):
     mem = [f'{message.from_user.first_name} {message.from_user.last_name}', f'{message.from_user.id}', f'{message.from_user.username}']
     if mem in curators:
@@ -93,6 +94,10 @@ def check(text, message):
         bot.send_message(message.chat.id,
                          text,
                          reply_markup=menu)
+def ch_ec(text, message):
+        bot.send_message(message.chat.id,
+                         text,
+                         reply_markup=choose)
 
 def guser(message):
     user = [message.text]
@@ -109,17 +114,22 @@ def start(message):
 
     msg = bot.send_message(message.chat.id, 'Напишите ваше имя и фамилию')
     bot.register_next_step_handler(msg, guser)
+    cmg = bot.send_message(message.chat.id, 'Выберите куратора')
+    bot.register_next_step_handler(msg, check)
 
 @bot.message_handler(content_types=['text'])
 def get_text(message):
     if message.text == 'Назад':
-        check('Основное меню', message)
+        check('Основное меню', message, menu)
 
     if message.text == 'Задания':
         bot.send_message(message.chat.id, 'Задания:', reply_markup=quests)
 
     if message.text == 'Задание номер 1':
-        bot.send_message(message.chat.id, 'Задание пока недоступно')
+        bot.send_message(message.chat.id, 'Для просмотра лекции перейди по этой ссылке: https://youtu.be/j1ldJJx9Qy0\n\n'\
+                                        'Задание 1 (на 2 балла максимум) https://forms.gle/YXG2RohJnNFHoSCBA\n'\
+                                        'Задание 2 (на 4 балла максимум) https://forms.gle/uyeLK835HErTQwGS7\n'\
+                                        'Задание 3 (на 8 баллов максимум) https://forms.gle/E29mooujMm7WdNG56\n')
     elif message.text == 'Задание номер 2':
         bot.send_message(message.chat.id, 'Задание пока недоступно')
     elif message.text == 'Задание номер 3':
